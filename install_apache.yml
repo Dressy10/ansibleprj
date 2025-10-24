@@ -8,7 +8,13 @@
     apt:
       name: apache2
       state: latest
-      when: ansible_distribution == "Ubuntu"
+    when: ansible_distribution == "Ubuntu"
+
+  - name: add php support for apache on Ubuntu
+    apt:
+      name: libapache2-mod-php
+      state: latest
+    when: ansible_distribution == "Ubuntu"
 
   - name: update cache for installed packages
     apt:
@@ -22,9 +28,14 @@
     dnf:
       name: httpd
       state: latest
-      when: ansible_distribution == "CentOs"
+    when: ansible_distribution == "CentOs"
+
+  - name: add php support for apache on CentOs
+    dnf:
+      name: libapache2-mod-php
+      state: latest
+    when: ansible_distribution == "CentOs"
 
   - name: update cache for installed packages
     dnf:
       update_cache: true
-

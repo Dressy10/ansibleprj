@@ -1,0 +1,15 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: instal apache and php packages
+    package:
+      name:
+        - "{{ apache_package }}"
+        - "{{ php_package }}"
+      update_cache: true
+      state: latest
+
+# used the module 'package' instead 'apt' and or 'dnf', as the package is a general OS package and works across multiple servers. Also, the  - "{{ apache_packages }}" and "{{ php_packages }}" are variables referenced in the inventory file to ensure each packages uses its assigned value. This further cleans up the install_apache.yml and cleaned_up_install_packages.yml

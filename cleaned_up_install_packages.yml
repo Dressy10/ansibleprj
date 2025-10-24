@@ -1,0 +1,27 @@
+---
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install apache2 package and add php support for Ubuntu
+    apt:
+      name:
+        - apache2
+        - libapache2-mod-php
+      state: latest
+      update_cache: true
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install httpd  package and add php support for CentOs
+    dnf:
+      name:
+        - httpd
+        - php
+      state: latest
+      update_cache: true
+    when: ansible_distribution == "CentOs"
