@@ -1,2 +1,5 @@
+[web_servers]
 54.236.19.55 apache_package=apache2 php_package=libapache2-mod-php
+
+[db_servers]
 54.242.240.122 ansible_user=ec2-user apache_package=httpd php_package=php

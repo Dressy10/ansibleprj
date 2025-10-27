@@ -1,0 +1,46 @@
+---
+
+- hosts: all
+  become: true
+  pre_tasks:
+
+
+  - name: install apache2 package and add php support for Ubuntu
+    apt:
+      name:
+        - apache2
+        - libapache2-mod-php
+      state: latest
+      update_cache: true
+    when: ansible_distribution == "Ubuntu"
+
+- hosts: all
+  become: true
+  tasks:
+
+  - name: install httpd  package and add php support for CentOs
+    dnf:
+      name:
+        - httpd
+        - php
+      state: latest
+      update_cache: true
+    when: ansible_distribution == "CentOS"
+
+- hosts: web_servers
+  become: true
+  tasks:
+
+  - name: install mariadb on CentOs
+    dnf:
+      name:
+        - mariadb
+      state: latest
+    when: ansible_distribution == "CentOS"
+
+  - name: install mariadb on Ubuntu
+    apt:
+      name:
+        - mariadb-server
+      state: latest
+    when: ansible_distribution == "Ubuntu"
